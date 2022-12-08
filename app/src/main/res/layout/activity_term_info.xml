@@ -4,16 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="UI.TermList">
+    tools:context="UI.TermInfo">
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HI">
+
+            </TextView>
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/TermListAddButton"
+        android:id="@+id/TermInfoAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="339dp"
-        android:layout_marginTop="659dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="336dp"
+        android:layout_marginTop="653dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="23dp"
         android:clickable="true"
         android:contentDescription="button to add term info"
         app:layout_constraintBottom_toBottomOf="parent"

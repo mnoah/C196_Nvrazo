@@ -1,4 +1,4 @@
-package com.example.c196_nvrazo.UI;
+package UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,13 +15,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button=findViewById(R.id.EnterButtonMainActivity);
-        button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    Intent intent=new Intent(MainActivity.this, TermList.class);
-                    startActivity(intent);
-        }
+        Button button = findViewById(R.id.EnterButtonMainActivity);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TermList.class);
+                startActivity(intent);
+            }
 
         });
 
