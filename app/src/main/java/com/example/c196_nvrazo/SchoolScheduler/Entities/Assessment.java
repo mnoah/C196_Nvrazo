@@ -1,4 +1,4 @@
-package Entities;
+package com.example.c196_nvrazo.SchoolScheduler.Entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "assessments ")
 public class Assessment {
     @PrimaryKey(autoGenerate = true)
-    private int ClassKey;
+    private int AssessmentID;
     private String AssessmentTitle;
     private String AssessmentEndDate;
 
-    public Assessment(int classKey, String assessmentTitle, String assessmentEndDate) {
-        ClassKey = classKey;
+    public Assessment(int assessmentID, String assessmentTitle, String assessmentEndDate) {
+        AssessmentID = assessmentID;
         AssessmentTitle = assessmentTitle;
         AssessmentEndDate = assessmentEndDate;
     }
@@ -19,12 +19,12 @@ public class Assessment {
     public Assessment() {
     }
 
-    public int getClassKey() {
-        return ClassKey;
+    public int getAssessmentID() {
+        return AssessmentID;
     }
 
-    public void setClassKey(int classKey) {
-        ClassKey = classKey;
+    public void setAssessmentID(int assessmentID) {
+        AssessmentID = assessmentID;
     }
 
     public String getAssessmentTitle() {

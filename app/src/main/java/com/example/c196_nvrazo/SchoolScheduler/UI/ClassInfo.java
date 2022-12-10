@@ -1,4 +1,4 @@
-package UI;
+package com.example.c196_nvrazo.SchoolScheduler.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,29 +1,28 @@
-package UI;
+package com.example.c196_nvrazo.SchoolScheduler.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.c196_nvrazo.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+public class TermInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button button = findViewById(R.id.EnterButtonMainActivity);
+        setContentView(R.layout.activity_term_info);
+        FloatingActionButton button = findViewById(R.id.TermInfoAddButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TermList.class);
+                Intent intent = new Intent(TermInfo.this, ClassInfo.class);
                 startActivity(intent);
             }
 
         });
-
     }
 }
