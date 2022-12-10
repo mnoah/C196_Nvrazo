@@ -1,4 +1,5 @@
 package com.example.c196_nvrazo.SchoolScheduler.Entities;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -6,6 +7,7 @@ import androidx.room.PrimaryKey;
 public class Course {
     @PrimaryKey(autoGenerate = true)
     private int CourseID;
+    private String CourseName;
     private String CourseStartDate;
     private String CourseEndDate;
     private String CourseStatus;
@@ -13,9 +15,10 @@ public class Course {
     private String CourseInstructorEmail;
     private String CourseInstructorPhone;
 
-    public Course(int courseID, String courseStartDate, String courseEndDate, String courseStatus,
+    public Course(int courseID, String courseName, String courseStartDate, String courseEndDate, String courseStatus,
                   String courseInstructorName, String courseInstructorEmail, String courseInstructorPhone) {
         CourseID = courseID;
+        CourseName = courseName;
         CourseStartDate = courseStartDate;
         CourseEndDate = courseEndDate;
         CourseStatus = courseStatus;
@@ -27,13 +30,15 @@ public class Course {
     public Course() {
     }
 
-    public int getCourseID() {
-        return CourseID;
-    }
+    public int getCourseID() { return CourseID; }
 
     public void setCourseID(int courseID) {
         CourseID = courseID;
     }
+
+    public String getCourseName() { return CourseName; }
+
+    public void setCourseName(String courseName) { CourseName = courseName; }
 
     public String getCourseStartDate() {
         return CourseStartDate;

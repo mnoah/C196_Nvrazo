@@ -13,35 +13,35 @@
         android:theme="@style/Theme.C196_Nvrazo"
         tools:targetApi="31">
         <activity
-            android:name="SchoolScheduler.ClassInfo"
+            android:name=".SchoolScheduler.UI.ClassInfo"
             android:exported="false"
             android:label="Class Details"
-            android:parentActivityName="SchoolScheduler.TermInfo">
+            android:parentActivityName="SchoolScheduler.UI.TermInfo">
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="SchoolScheduler.TermInfo"
+            android:name=".SchoolScheduler.UI.TermInfo"
             android:exported="false"
             android:label="Term Details"
-            android:parentActivityName="SchoolScheduler.TermList">
+            android:parentActivityName="SchoolScheduler.UI.TermList">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="SchoolScheduler.TermList"
+            android:name=".SchoolScheduler.UI.TermList"
             android:exported="false"
             android:label="Term List"
-            android:parentActivityName="SchoolScheduler.MainActivity">
+            android:parentActivityName="SchoolScheduler.UI.MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="SchoolScheduler.MainActivity"
+            android:name=".SchoolScheduler.UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
