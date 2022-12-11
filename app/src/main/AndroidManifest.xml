@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -12,11 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.C196_Nvrazo"
         tools:targetApi="31">
+
         <activity
             android:name=".SchoolScheduler.UI.ClassInfo"
             android:exported="false"
             android:label="Class Details"
-            android:parentActivityName="SchoolScheduler.UI.TermInfo">
+            android:parentActivityName=".SchoolScheduler.UI.TermInfo">
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -26,7 +28,7 @@
             android:name=".SchoolScheduler.UI.TermInfo"
             android:exported="false"
             android:label="Term Details"
-            android:parentActivityName="SchoolScheduler.UI.TermList">
+            android:parentActivityName=".SchoolScheduler.UI.TermList">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -35,7 +37,7 @@
             android:name=".SchoolScheduler.UI.TermList"
             android:exported="false"
             android:label="Term List"
-            android:parentActivityName="SchoolScheduler.UI.MainActivity">
+            android:parentActivityName=".SchoolScheduler.UI.MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

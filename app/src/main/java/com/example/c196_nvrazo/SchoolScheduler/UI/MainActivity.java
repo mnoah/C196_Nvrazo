@@ -35,16 +35,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.addData:
-                Term term = new Term(0, "Summer", "1/1/2020", "1/1/2022");
-                Repository repository = new Repository(getApplication());
-                repository.insert(term);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.addData) {
+            Term term = new Term(0, "Summer", "1/1/2020", "1/1/2022");
+            Repository repository = new Repository(getApplication());
+            repository.insert(term);
 
-                Course course = new Course(0, "Math", "9/15/2015", "10/20/2020", "good standing", "Jeff Jeffson",
-                        "jeff@School.com", "555-555-225");
-
+            Course course = new Course(0, "Math", "9/15/2015", "10/20/2020", "good standing", "Jeff Jeffson", "jeff@School.com", "555-555-225");
+            repository.insert(course);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }
