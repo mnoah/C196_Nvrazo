@@ -1,6 +1,7 @@
 package com.example.c196_nvrazo.SchoolScheduler.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ public class TermList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
+        RecyclerView recyclerView=findViewById(R.id.TermListRecyclerView);
         FloatingActionButton button = findViewById(R.id.TermListAddButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
