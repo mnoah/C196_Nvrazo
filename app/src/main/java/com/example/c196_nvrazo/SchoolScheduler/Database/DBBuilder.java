@@ -29,7 +29,7 @@ public abstract class DBBuilder extends RoomDatabase {
         if(INSTANCE==null){
             synchronized (DBBuilder.class){
                 if(INSTANCE==null){
-                    INSTANCE= Room.databaseBuilder(context.getApplicationContext(), DBBuilder.class, "SchoolDB.db")
+                    INSTANCE= Room.databaseBuilder(context.getApplicationContext(), DBBuilder.class, "SchoolSchedulerDB.db")
                             .fallbackToDestructiveMigration()
                             .build();
                 }

@@ -1,7 +1,6 @@
 package com.example.c196_nvrazo.SchoolScheduler.Database;
 
 import android.app.Application;
-
 import com.example.c196_nvrazo.SchoolScheduler.DAO.AssessmentDAO;
 import com.example.c196_nvrazo.SchoolScheduler.DAO.CourseDAO;
 import com.example.c196_nvrazo.SchoolScheduler.DAO.TermDAO;
