@@ -41,24 +41,39 @@ public class TermInfo extends AppCompatActivity {
         EditTermStartDateText.setText(TermStartDate);
         EditTermEndDateText.setText(TermEndDate);
 
-        id = getIntent().getIntExtra("TermId", 0);
+        id = getIntent().getIntExtra("TermId", -1);
         repository = new Repository(getApplication());
-        Button button = findViewById(R.id.TermInfoSaveButton);
-        button.setOnClickListener(new View.OnClickListener(){
+        Button saveButton = findViewById(R.id.TermInfoSaveButton);
+        saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 if(id == -1){
-                    term = new Term(0, EditTermNameText.getText().toString(),EditTermStartDateText.getText().toString(), EditTermEndDateText.getText().toString());
+                    term = new Term(0, EditTermNameText.getText().toString(),
+                            EditTermStartDateText.getText().toString(),
+                            EditTermEndDateText.getText().toString());
                     repository.insert(term);
                     //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show();
 
                 }else{
-                    term = new Term(id, EditTermNameText.getText().toString(),EditTermStartDateText.getText().toString(), EditTermEndDateText.getText().toString());
-                    repository.insert(term);
-                    //Toast.makeText(this, "Term is Updated", Toast.LENGTH_LONG).show();
+                    term = new Term(id, EditTermNameText.getText().toString(),
+                            EditTermStartDateText.getText().toString(),
+                            EditTermEndDateText.getText().toString());
+                    repository.update(term);
+                    //Toast.makeText(this, "Term is updated", Toast.LENGTH_LONG).show();
 
                 }
 
+            }
+        });
+
+        Button deleteButton = findViewById(R.id.TermInfoDeleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                term = new Term(id, EditTermNameText.getText().toString(),
+                        EditTermStartDateText.getText().toString(),
+                        EditTermEndDateText.getText().toString());
+                repository.delete(term);
             }
         });
 
