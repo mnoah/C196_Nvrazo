@@ -17,7 +17,7 @@
 
 
         <activity
-            android:name=".SchoolScheduler.UI.ClassInfo"
+            android:name=".SchoolScheduler.UI.CourseInfo"
             android:exported="false"
             android:label="Class Details"
             android:parentActivityName=".SchoolScheduler.UI.TermInfo">

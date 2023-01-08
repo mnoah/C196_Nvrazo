@@ -14,9 +14,10 @@ public class Course {
     private String CourseInstructorName;
     private String CourseInstructorEmail;
     private String CourseInstructorPhone;
+    private int TermId;
 
     public Course(int courseID, String courseName, String courseStartDate, String courseEndDate, String courseStatus,
-                  String courseInstructorName, String courseInstructorEmail, String courseInstructorPhone) {
+                  String courseInstructorName, String courseInstructorEmail, String courseInstructorPhone, int termId) {
         CourseID = courseID;
         CourseName = courseName;
         CourseStartDate = courseStartDate;
@@ -25,6 +26,7 @@ public class Course {
         CourseInstructorName = courseInstructorName;
         CourseInstructorEmail = courseInstructorEmail;
         CourseInstructorPhone = courseInstructorPhone;
+        TermId = termId;
     }
 
     public Course() {
@@ -87,6 +89,10 @@ public class Course {
     public void setCourseInstructorPhone(String courseInstructorPhone) {
         CourseInstructorPhone = courseInstructorPhone;
     }
+
+    public int getTermId() {return TermId;}
+
+    public void setTermId(int termId) { TermId = termId;}
 }
 
 

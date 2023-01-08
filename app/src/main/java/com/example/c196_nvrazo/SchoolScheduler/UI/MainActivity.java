@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             Repository repository = new Repository(getApplication());
             repository.insert(term);
 
-            Course course = new Course(0, "Math", "9/15/2015", "10/20/2020", "good standing", "Jeff Jeffson", "jeff@School.com", "555-555-225");
+            Course course = new Course(0, "Math", "9/15/2015", "10/20/2020", "good standing", "Jeff Jeffson", "jeff@School.com", "555-555-225", 2);
             repository.insert(course);
             return true;
         }
