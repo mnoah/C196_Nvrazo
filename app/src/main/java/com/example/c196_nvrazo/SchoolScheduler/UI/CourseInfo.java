@@ -66,8 +66,9 @@ public class CourseInfo extends AppCompatActivity {
             EditCourseStartDateText.setText(CourseStartDate);
             EditCourseEndDateText.setText(CourseEndDate);
             EditCourseStatusText.setText(CourseStatus);
-            EditCourseInstructorEmailText.setText(CourseInstructorEmail);
+            EditCourseInstructorNameText.setText(CourseInstructorName);
             EditCourseInstructorPhoneText.setText(CourseInstructorPhone);
+            EditCourseInstructorEmailText.setText(CourseInstructorEmail);
 
             termId = getIntent().getIntExtra("TermId", -1);
             courseId = getIntent().getIntExtra("CourseId", -1 );
@@ -83,7 +84,7 @@ public class CourseInfo extends AppCompatActivity {
 
             List<Course> filteredCourses = new ArrayList<>();
             for(Course c : repository.getmAllCourses()){
-                if(c.getTermId() == termId)
+                if(c.getCourseID() == courseId)
                     filteredCourses.add(c);
             }
 
@@ -101,7 +102,7 @@ public class CourseInfo extends AppCompatActivity {
                                 EditCourseInstructorPhoneText.getText().toString(),
                                 EditCourseInstructorEmailText.getText().toString(),
                                 termId);
-                                repository.insert(term);
+                                repository.insert(course);
                                 //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show();
                     }else{
                         course = new Course(courseId, EditCourseNameText.getText().toString(),
@@ -112,7 +113,7 @@ public class CourseInfo extends AppCompatActivity {
                                 EditCourseInstructorPhoneText.getText().toString(),
                                 EditCourseInstructorEmailText.getText().toString(),
                                 termId);
-                                repository.update(term);
+                                repository.update(course);
                         //Toast.makeText(this, "Term is updated", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -130,7 +131,7 @@ public class CourseInfo extends AppCompatActivity {
                             EditCourseInstructorPhoneText.getText().toString(),
                             EditCourseInstructorEmailText.getText().toString(),
                             termId);
-                    repository.delete(term);
+                    repository.delete(course);
                 }
             });
 
