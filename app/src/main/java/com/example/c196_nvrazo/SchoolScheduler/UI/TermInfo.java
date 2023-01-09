@@ -50,7 +50,7 @@ public class TermInfo extends AppCompatActivity {
         repository = new Repository(getApplication());
 
         //getting and displaying courses for a given term
-        RecyclerView recyclerView = findViewById(R.id.assassmentInfoRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.CourseInfoRecyclerView);
         final CourseAdapter courseAdapter = new CourseAdapter(this);
         recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

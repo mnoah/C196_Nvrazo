@@ -22,6 +22,7 @@ public class CourseInfo extends AppCompatActivity {
         EditText EditCourseStartDateText;
         EditText EditCourseNameText;
         EditText EditCourseEndDateText;
+        EditText EditCourseStatusText;
         EditText EditCourseInstructorNameText;
         EditText EditCourseInstructorEmailText;
         EditText EditCourseInstructorPhoneText;
@@ -29,6 +30,7 @@ public class CourseInfo extends AppCompatActivity {
         String CourseName;
         String CourseStartDate;
         String CourseEndDate;
+        String CourseStatus;
         String CourseInstructorName;
         String CourseInstructorEmail;
         String CourseInstructorPhone;
@@ -39,7 +41,6 @@ public class CourseInfo extends AppCompatActivity {
         Course course;
         Repository repository;
 
-
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -48,18 +49,25 @@ public class CourseInfo extends AppCompatActivity {
             EditCourseNameText= findViewById(R.id.editcoursenametext);
             EditCourseStartDateText = findViewById(R.id.editcoursestartdatetext);
             EditCourseEndDateText = findViewById(R.id.editcourseenddatetext);
+            EditCourseStatusText = findViewById(R.id.editcoursestatustext);
             EditCourseInstructorNameText = findViewById(R.id.editcourseinstructornametext);
             EditCourseInstructorPhoneText = findViewById(R.id.editcourseinstructorphonetext);
             EditCourseInstructorEmailText = findViewById(R.id.editcourseinstructoremailtext);
 
-
             CourseName = getIntent().getStringExtra("CourseName");
             CourseStartDate = getIntent().getStringExtra("CourseStartDate");
             CourseEndDate = getIntent().getStringExtra("CourseEndDate");
+            CourseStatus = getIntent().getStringExtra("CourseStatus");
+            CourseInstructorName = getIntent().getStringExtra("CourseInstructorName");
+            CourseInstructorEmail = getIntent().getStringExtra("CourseInstructorEmail");
+            CourseInstructorPhone = getIntent().getStringExtra("CourseInstructorPhone");
 
             EditCourseNameText.setText(CourseName);
             EditCourseStartDateText.setText(CourseStartDate);
             EditCourseEndDateText.setText(CourseEndDate);
+            EditCourseStatusText.setText(CourseStatus);
+            EditCourseInstructorEmailText.setText(CourseInstructorEmail);
+            EditCourseInstructorPhoneText.setText(CourseInstructorPhone);
 
             termId = getIntent().getIntExtra("TermId", -1);
             courseId = getIntent().getIntExtra("CourseId", -1 );
@@ -88,29 +96,40 @@ public class CourseInfo extends AppCompatActivity {
                         course = new Course(0, EditCourseNameText.getText().toString(),
                                 EditCourseStartDateText.getText().toString(),
                                 EditCourseStartDateText.getText().toString(),
-                                );
-                        repository.insert(term);
-                        //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show();
-
+                                EditCourseStatusText.getText().toString(),
+                                EditCourseInstructorNameText.getText().toString(),
+                                EditCourseInstructorPhoneText.getText().toString(),
+                                EditCourseInstructorEmailText.getText().toString(),
+                                termId);
+                                repository.insert(term);
+                                //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show();
                     }else{
-                        term = new Term(termId, EditTermNameText.getText().toString(),
-                                EditTermStartDateText.getText().toString(),
-                                EditTermEndDateText.getText().toString());
-                        repository.update(term);
+                        course = new Course(courseId, EditCourseNameText.getText().toString(),
+                                EditCourseStartDateText.getText().toString(),
+                                EditCourseStartDateText.getText().toString(),
+                                EditCourseStatusText.getText().toString(),
+                                EditCourseInstructorNameText.getText().toString(),
+                                EditCourseInstructorPhoneText.getText().toString(),
+                                EditCourseInstructorEmailText.getText().toString(),
+                                termId);
+                                repository.update(term);
                         //Toast.makeText(this, "Term is updated", Toast.LENGTH_LONG).show();
-
                     }
-
                 }
             });
 
-            Button deleteButton = findViewById(R.id.TermInfoDeleteButton);
+            Button deleteButton = findViewById(R.id.CourseInfoDeleteButton);
             deleteButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-                    term = new Term(termId, EditTermNameText.getText().toString(),
-                            EditTermStartDateText.getText().toString(),
-                            EditTermEndDateText.getText().toString());
+                    course = new Course(courseId, EditCourseNameText.getText().toString(),
+                            EditCourseStartDateText.getText().toString(),
+                            EditCourseStartDateText.getText().toString(),
+                            EditCourseStatusText.getText().toString(),
+                            EditCourseInstructorNameText.getText().toString(),
+                            EditCourseInstructorPhoneText.getText().toString(),
+                            EditCourseInstructorEmailText.getText().toString(),
+                            termId);
                     repository.delete(term);
                 }
             });
@@ -120,20 +139,11 @@ public class CourseInfo extends AppCompatActivity {
             floatButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(com.example.c196_nvrazo.SchoolScheduler.UI.TermInfo.this, CourseInfo.class);
-                    intent.putExtra("TermID", termId);
+                    Intent intent = new Intent(com.example.c196_nvrazo.SchoolScheduler.UI.CourseInfo.this, AssessmentInfo.class);
+                    intent.putExtra("CourseId", courseId);
                     startActivity(intent);
                 }
 
             });
         }
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_info);
-
-    }
 }

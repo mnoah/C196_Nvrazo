@@ -82,6 +82,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Course Status">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/editcoursestatustext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Enter Course Status"></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Course Start Date">
 
                 </TextView>
@@ -92,6 +111,7 @@
                     android:layout_height="50dp"
                     android:hint="Enter Course End Date"></EditText>
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
