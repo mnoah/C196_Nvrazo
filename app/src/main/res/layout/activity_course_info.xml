@@ -101,7 +101,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Start Date">
+                    android:text="Course Instructor Name">
 
                 </TextView>
 
@@ -109,7 +109,7 @@
                     android:id="@+id/editcourseinstructornametext"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:hint="Enter Course End Date"></EditText>
+                    android:hint="Enter Course Instructor Name"></EditText>
             </LinearLayout>
 
 
@@ -121,7 +121,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Start Date">
+                    android:text="Course Instructor Phone">
 
                 </TextView>
 
@@ -129,7 +129,7 @@
                     android:id="@+id/editcourseinstructorphonetext"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:hint="Enter Course End Date"></EditText>
+                    android:hint="Enter Course Instructor Phone"></EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -140,7 +140,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Start Date">
+                    android:text="Course Instructor Email">
 
                 </TextView>
 
@@ -148,7 +148,7 @@
                     android:id="@+id/editcourseinstructoremailtext"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:hint="Enter Course End Date"></EditText>
+                    android:hint="Enter Course Instructor Email"></EditText>
             </LinearLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -196,8 +196,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assassmentInfoRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="302dp"
+        android:layout_width="402dp"
+        android:layout_height="162dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -206,4 +206,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CourseInfoScrollView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
