@@ -15,6 +15,16 @@
         android:theme="@style/Theme.C196_Nvrazo"
         tools:targetApi="31">
 
+        <activity
+            android:name=".SchoolScheduler.UI.AssessmentInfo"
+            android:exported="false"
+            android:label="Class Details"
+            android:parentActivityName=".SchoolScheduler.UI.CourseInfo">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
 
         <activity
             android:name=".SchoolScheduler.UI.CourseInfo"

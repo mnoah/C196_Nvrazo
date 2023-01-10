@@ -1,6 +1,7 @@
 package com.example.c196_nvrazo.SchoolScheduler.Entities;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courses")

@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.example.c196_nvrazo.R;
 import com.example.c196_nvrazo.SchoolScheduler.Database.Repository;
+import com.example.c196_nvrazo.SchoolScheduler.Entities.Assessment;
 import com.example.c196_nvrazo.SchoolScheduler.Entities.Course;
 import com.example.c196_nvrazo.SchoolScheduler.Entities.Term;
 
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
             Course course = new Course(0, "Math", "9/15/2015", "10/20/2020", "good standing", "Jeff Jeffson", "jeff@School.com", "555-555-225", 2);
             repository.insert(course);
+
+
+            Assessment assessment = new Assessment(0, "Exam", "12/20/2023", 1);
+            repository.insert(assessment);
+
             return true;
         }
         return super.onOptionsItemSelected(item);

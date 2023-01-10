@@ -26,27 +26,28 @@ public class TermInfo extends AppCompatActivity {
     String TermName;
     String TermStartDate;
     String TermEndDate;
-    int termId;
+    int Id;
     Term term;
     Repository repository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_info);
 
-        EditTermNameText= findViewById(R.id.edittermnametext);
+        EditTermNameText = findViewById(R.id.edittermnametext);
         EditTermStartDateText = findViewById(R.id.edittermstartdatetext);
         EditTermEndDateText = findViewById(R.id.edittermenddatetext);
 
-        TermName = getIntent().getStringExtra("TermName");
-        TermStartDate = getIntent().getStringExtra("TermStartDate");
-        TermEndDate = getIntent().getStringExtra("TermEndDate");
+        TermName = getIntent().getStringExtra("Name");
+        TermStartDate = getIntent().getStringExtra("StartDate");
+        TermEndDate = getIntent().getStringExtra("EndDate");
 
         EditTermNameText.setText(TermName);
         EditTermStartDateText.setText(TermStartDate);
         EditTermEndDateText.setText(TermEndDate);
 
-        termId = getIntent().getIntExtra("TermId", -1);
+        Id = getIntent().getIntExtra("Id", -1);
         repository = new Repository(getApplication());
 
         //getting and displaying courses for a given term
@@ -57,29 +58,31 @@ public class TermInfo extends AppCompatActivity {
         courseAdapter.setCourses(repository.getmAllCourses());
 
         List<Course> filteredCourses = new ArrayList<>();
-        for(Course c : repository.getmAllCourses()){
-            if(c.getTermId() == termId)
+        for (Course c : repository.getmAllCourses()) {
+            if (c.getTermId() == Id)
                 filteredCourses.add(c);
         }
 
+        courseAdapter.setCourses(filteredCourses);
+
         //Save button setup
         Button saveButton = findViewById(R.id.TermInfoSaveButton);
-        saveButton.setOnClickListener(new View.OnClickListener(){
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(termId == -1){
+            public void onClick(View view) {
+                if (Id == -1) {
                     term = new Term(0, EditTermNameText.getText().toString(),
                             EditTermStartDateText.getText().toString(),
                             EditTermEndDateText.getText().toString());
                     repository.insert(term);
-                    //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show();
 
-                }else{
-                    term = new Term(termId, EditTermNameText.getText().toString(),
+
+                } else {
+                    term = new Term(Id, EditTermNameText.getText().toString(),
                             EditTermStartDateText.getText().toString(),
                             EditTermEndDateText.getText().toString());
                     repository.update(term);
-                    //Toast.makeText(this, "Term is updated", Toast.LENGTH_LONG).show();
+
 
                 }
 
@@ -87,10 +90,10 @@ public class TermInfo extends AppCompatActivity {
         });
 
         Button deleteButton = findViewById(R.id.TermInfoDeleteButton);
-        deleteButton.setOnClickListener(new View.OnClickListener(){
+        deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                term = new Term(termId, EditTermNameText.getText().toString(),
+            public void onClick(View view) {
+                term = new Term(Id, EditTermNameText.getText().toString(),
                         EditTermStartDateText.getText().toString(),
                         EditTermEndDateText.getText().toString());
                 repository.delete(term);
@@ -103,10 +106,25 @@ public class TermInfo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TermInfo.this, CourseInfo.class);
-                intent.putExtra("TermID", termId);
+                intent.putExtra("TermId", Id);
                 startActivity(intent);
             }
 
         });
+
+
     }
+
+
+
+/*    @Override
+    protected void onResume(){
+        super.onResume();
+        List<Term> allTerms = repository.getmAllTerms();
+        RecyclerView recyclerView = findViewById(R.id.CourseInfoRecyclerView);
+        final TermAdapter termAdapter = new TermAdapter(this);
+        recyclerView.setAdapter(termAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        termAdapter.setTerms(allTerms);
+    }*/
 }
