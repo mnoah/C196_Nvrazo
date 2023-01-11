@@ -117,14 +117,19 @@ public class TermInfo extends AppCompatActivity {
 
 
 
-/*    @Override
+    @Override
     protected void onResume(){
+
         super.onResume();
-        List<Term> allTerms = repository.getmAllTerms();
         RecyclerView recyclerView = findViewById(R.id.CourseInfoRecyclerView);
-        final TermAdapter termAdapter = new TermAdapter(this);
-        recyclerView.setAdapter(termAdapter);
+        final CourseAdapter courseAdapter = new CourseAdapter(this);
+        recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        termAdapter.setTerms(allTerms);
-    }*/
+        List<Course> filteredCourses = new ArrayList<>();
+        for (Course c : repository.getmAllCourses()) {
+            if (c.getTermId() == Id)
+                filteredCourses.add(c);
+        }
+        courseAdapter.setCourses(filteredCourses);
+    }
 }

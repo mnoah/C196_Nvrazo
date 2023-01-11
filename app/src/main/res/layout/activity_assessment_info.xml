@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SchoolScheduler.UI.CourseInfo">
+    tools:context=".SchoolScheduler.UI.AssessmentInfo">
 
     <ScrollView
-        android:id="@+id/CourseInfoScrollView"
+        android:id="@+id/AssessmentInfoScrollView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
@@ -78,22 +78,6 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
         </LinearLayout>
     </ScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/CourseInfoAddAssessmentButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="338dp"
-        android:layout_marginTop="657dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="18dp"
-        android:clickable="true"
-        android:contentDescription="button for adding a new class"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
 
   <!--  <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/AssessmentInfoRecyclerView"

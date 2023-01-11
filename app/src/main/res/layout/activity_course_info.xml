@@ -7,7 +7,7 @@
     tools:context=".SchoolScheduler.UI.CourseInfo">
 
     <ScrollView
-        android:id="@+id/CourseInfoScrollView"
+        android:id="@+id/AssessmentInfoScrollView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
@@ -48,13 +48,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course Start Date"></TextView>
+                    android:text="Course Start Date">
+
+                </TextView>
 
                 <EditText
                     android:id="@+id/editcoursestartdatetext"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="Enter Course Start Date"></EditText>
+                    android:inputType="none"
+                    android:hint="Enter Course Start Date">
+
+                </EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -65,13 +70,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Course End Date"></TextView>
+                    android:text="Course End Date">
+
+                </TextView>
 
                 <EditText
                     android:id="@+id/editcourseenddatetext"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="Enter Course End Date"></EditText>
+                    android:hint="Enter Course End Date">
+
+                </EditText>
             </LinearLayout>
 
             <LinearLayout
@@ -195,9 +204,9 @@
         app:srcCompat="@drawable/ic_baseline_add_24" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assassmentInfoRecyclerView"
-        android:layout_width="402dp"
-        android:layout_height="162dp"
+        android:id="@+id/assessmentInfoRecyclerView"
+        android:layout_width="409dp"
+        android:layout_height="302dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
@@ -205,6 +214,6 @@
         app:layout_constraintBottom_toTopOf="@+id/CourseInfoAddAssessmentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CourseInfoScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/AssessmentInfoScrollView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

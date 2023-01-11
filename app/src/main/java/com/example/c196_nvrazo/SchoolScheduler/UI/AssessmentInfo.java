@@ -86,18 +86,5 @@ public class AssessmentInfo extends AppCompatActivity {
                 repository.delete(course);
             }
         });
-
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        List<Assessment> allAssessment = repository.getmAssessments();
-        RecyclerView recyclerView = findViewById(R.id.assassmentInfoRecyclerView);
-        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
-        recyclerView.setAdapter(assessmentAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        assessmentAdapter.setAssessment(allAssessment);
     }
 }
