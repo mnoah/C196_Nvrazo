@@ -13,9 +13,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.c196_nvrazo.R;
 import com.example.c196_nvrazo.SchoolScheduler.Database.Repository;
@@ -42,6 +45,8 @@ public class CourseInfo extends AppCompatActivity {
     EditText EditCourseInstructorNameText;
     EditText EditCourseInstructorEmailText;
     EditText EditCourseInstructorPhoneText;
+
+    Spinner courseStatusSpinner;
 
     DatePickerDialog.OnDateSetListener OnCourseStartDate;
     final Calendar CourseStartDatePicker = Calendar.getInstance();
@@ -76,10 +81,11 @@ public class CourseInfo extends AppCompatActivity {
         EditCourseStartDateText = findViewById(R.id.editcoursestartdatetext);
         EditCourseEndDateText = findViewById(R.id.editcourseenddatetext);
         EditCourseStatusText = findViewById(R.id.editcoursestatustext);
+
         EditCourseInstructorNameText = findViewById(R.id.editcourseinstructornametext);
         EditCourseInstructorPhoneText = findViewById(R.id.editcourseinstructorphonetext);
         EditCourseInstructorEmailText = findViewById(R.id.editcourseinstructoremailtext);
-
+        courseStatusSpinner = findViewById(R.id.CourseStatusSpinner);
 
         Id = getIntent().getIntExtra("Id", -1);
         CourseName = getIntent().getStringExtra("Name");
@@ -101,6 +107,33 @@ public class CourseInfo extends AppCompatActivity {
         EditCourseInstructorEmailText.setText(CourseInstructorEmail);
 
         repository = new Repository(getApplication());
+        List<String> Status = new ArrayList<>();
+
+        Status.add("Select Status");
+        Status.add("In Progress");
+        Status.add("Completed");
+        Status.add("Dropped");
+        Status.add("Plan to take");
+
+        Spinner spinner = findViewById(R.id.CourseStatusSpinner);
+        ArrayAdapter<String> statusArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Status);
+        spinner.setAdapter(statusArrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(CourseStatus == "Select Status") {
+                    EditCourseStatusText.setText(statusArrayAdapter.getItem(i));
+                }else{
+                    return;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                EditCourseStatusText.setText("Nothing selected");
+            }
+        });
 
         //getting and displaying assessments for a given term
         RecyclerView recyclerView = findViewById(R.id.assessmentInfoRecyclerView);
@@ -130,7 +163,6 @@ public class CourseInfo extends AppCompatActivity {
                             EditCourseInstructorEmailText.getText().toString(),
                             termId);
                     repository.insert(course);
-                    //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show();
                 } else {
                     course = new Course(Id, EditCourseNameText.getText().toString(),
                             EditCourseStartDateText.getText().toString(),
@@ -141,7 +173,6 @@ public class CourseInfo extends AppCompatActivity {
                             EditCourseInstructorEmailText.getText().toString(),
                             termId);
                     repository.update(course);
-                    //Toast.makeText(this, "Term is updated", Toast.LENGTH_LONG).show();
                 }
             }
 
