@@ -49,7 +49,7 @@ public class TermList extends AppCompatActivity {
     }
 
 
-/*    @Override
+    @Override
     protected void onResume(){
         super.onResume();
         List<Term> allTerms = repository.getmAllTerms();
@@ -58,5 +58,5 @@ public class TermList extends AppCompatActivity {
         recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         termAdapter.setTerms(allTerms);
-    }*/
+    }
 }

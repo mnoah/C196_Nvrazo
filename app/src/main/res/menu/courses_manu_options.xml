@@ -6,9 +6,9 @@
         android:id="@+id/share"
         android:title="share" />
     <item
-        android:id="@+id/notifystart"
+        android:id="@+id/notify_start"
         android:title="notify_start" />
     <item
-        android:id="@+id/notifyend"
+        android:id="@+id/notify_end"
         android:title="notify_end" />
 </menu>

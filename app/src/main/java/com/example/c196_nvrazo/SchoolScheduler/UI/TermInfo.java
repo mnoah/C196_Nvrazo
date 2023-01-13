@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
 import com.example.c196_nvrazo.SchoolScheduler.Database.Repository;
 import com.example.c196_nvrazo.SchoolScheduler.Entities.*;
 import com.example.c196_nvrazo.R;
@@ -44,6 +46,8 @@ public class TermInfo extends AppCompatActivity {
     int Id;
     Term term;
     Repository repository;
+    Term currentTerm;
+    int numOfCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,17 +56,7 @@ public class TermInfo extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DateFormat, Locale.US);
         setContentView(R.layout.activity_term_info);
 
-        EditTermNameText = findViewById(R.id.edittermnametext);
-        EditTermStartDateText = findViewById(R.id.edittermstartdatetext);
-        EditTermEndDateText = findViewById(R.id.edittermenddatetext);
-
-        TermName = getIntent().getStringExtra("Name");
-        TermStartDate = getIntent().getStringExtra("StartDate");
-        TermEndDate = getIntent().getStringExtra("EndDate");
-
-        EditTermNameText.setText(TermName);
-        EditTermStartDateText.setText(TermStartDate);
-        EditTermEndDateText.setText(TermEndDate);
+        ReloadPage();
 
         Id = getIntent().getIntExtra("Id", -1);
         repository = new Repository(getApplication());
@@ -93,7 +87,7 @@ public class TermInfo extends AppCompatActivity {
                             EditTermStartDateText.getText().toString(),
                             EditTermEndDateText.getText().toString());
                     repository.insert(term);
-
+                    Toast.makeText(TermInfo.this, EditTermNameText.getText().toString() + " was created", Toast.LENGTH_LONG).show();
 
                 } else {
                     term = new Term(Id,
@@ -101,10 +95,9 @@ public class TermInfo extends AppCompatActivity {
                             EditTermStartDateText.getText().toString(),
                             EditTermEndDateText.getText().toString());
                     repository.update(term);
-
-
+                    Toast.makeText(TermInfo.this, TermName + " was updated", Toast.LENGTH_LONG).show();
                 }
-
+                finish();
             }
         });
 
@@ -115,7 +108,12 @@ public class TermInfo extends AppCompatActivity {
                 term = new Term(Id, EditTermNameText.getText().toString(),
                         EditTermStartDateText.getText().toString(),
                         EditTermEndDateText.getText().toString());
-                repository.delete(term);
+                //repository.delete(term);
+
+                DeleteTerm();
+
+
+
             }
         });
 
@@ -214,7 +212,6 @@ public class TermInfo extends AppCompatActivity {
 
     @Override
     protected void onResume(){
-
         super.onResume();
         RecyclerView recyclerView = findViewById(R.id.CourseInfoRecyclerView);
         final CourseAdapter courseAdapter = new CourseAdapter(this);
@@ -227,4 +224,42 @@ public class TermInfo extends AppCompatActivity {
         }
         courseAdapter.setCourses(filteredCourses);
     }
+
+    public void DeleteTerm(){
+        for (Term term : repository.getmAllTerms()) {
+            if (term.getTermID() == Id) currentTerm = term;
+        }
+
+        numOfCourse = 0;
+        for (Course course : repository.getmAllCourses()) {
+            if (course.getTermId() == Id) ++numOfCourse;
+        }
+
+        if (numOfCourse == 0) {
+            repository.delete(currentTerm);
+            Toast.makeText(TermInfo.this, currentTerm.getTermName() + " was deleted", Toast.LENGTH_LONG).show();
+            finish();
+        } else {
+            Toast.makeText(TermInfo.this, "Can't delete a product with parts", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    public void ReloadPage(){
+        EditTermNameText = findViewById(R.id.edittermnametext);
+        EditTermStartDateText = findViewById(R.id.edittermstartdatetext);
+        EditTermEndDateText = findViewById(R.id.edittermenddatetext);
+
+        TermName = getIntent().getStringExtra("Name");
+        TermStartDate = getIntent().getStringExtra("StartDate");
+        TermEndDate = getIntent().getStringExtra("EndDate");
+
+        EditTermNameText.setText(TermName);
+        EditTermStartDateText.setText(TermStartDate);
+        EditTermEndDateText.setText(TermEndDate);
+
+        Id = getIntent().getIntExtra("Id", -1);
+        repository = new Repository(getApplication());
+    }
+
 }

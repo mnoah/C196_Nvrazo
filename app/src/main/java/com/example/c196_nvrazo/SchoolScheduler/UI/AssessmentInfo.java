@@ -1,8 +1,13 @@
 package com.example.c196_nvrazo.SchoolScheduler.UI;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -76,15 +81,14 @@ public class AssessmentInfo extends AppCompatActivity {
                             EditAssessmentEndDateText.getText().toString(),
                             courseId);
                     repository.insert(assessment);
-                    //Toast.makeText(this, "Term is saved", Toast.LENGTH_LONG).show();
                 }else{
                     assessment = new Assessment(Id,
                             EditAssessmentNameText.getText().toString(),
                             EditAssessmentEndDateText.getText().toString(),
                             courseId);
                     repository.update(assessment);
-                    //Toast.makeText(this, "Term is updated", Toast.LENGTH_LONG).show();
                 }
+                finish();
             }
         });
 
@@ -96,7 +100,8 @@ public class AssessmentInfo extends AppCompatActivity {
                         EditAssessmentNameText.getText().toString(),
                         EditAssessmentEndDateText.getText().toString(),
                         courseId);
-                repository.delete(course);
+                repository.delete(assessment);
+                finish();
             }
         });
 
@@ -137,5 +142,38 @@ public class AssessmentInfo extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         EditAssessmentEndDateText.setText(sdf.format(AssessmentEndDatePicker.getTime()));
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.assessment_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.notify_end:
+                String dateFromScreen = EditAssessmentEndDateText.getText().toString();
+                String myFormat = "MM/dd/yy"; //In which you need put here
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
+                Date myDate = null;
+
+                try {
+                    myDate = simpleDateFormat.parse(dateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Long trigger = myDate.getTime();
+                Intent intent = new Intent(AssessmentInfo.this, MyReceiver.class);
+                intent.putExtra("key", dateFromScreen + " should trigger");
+                PendingIntent sender = PendingIntent.getBroadcast(AssessmentInfo.this, ++MainActivity.NumberAlrt, intent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

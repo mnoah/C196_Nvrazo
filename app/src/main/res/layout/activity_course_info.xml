@@ -7,10 +7,11 @@
     tools:context=".SchoolScheduler.UI.CourseInfo">
 
     <ScrollView
-        android:id="@+id/AssessmentInfoScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:id="@+id/CourseInfoScrollView"
+        android:layout_width="413dp"
+        android:layout_height="500dp"
         android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -32,11 +33,10 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/editcoursenametext"
+                    android:id="@+id/edit_course_name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Course Name">
-                </EditText>
+                    android:hint="Enter Course Name"></EditText>
 
             </LinearLayout>
 
@@ -53,11 +53,11 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/editcoursestartdatetext"
+                    android:id="@+id/edit_course_start_date_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="none"
-                    android:hint="Enter Course Start Date">
+                    android:hint="Enter Course Start Date"
+                    android:inputType="none">
 
                 </EditText>
             </LinearLayout>
@@ -75,7 +75,7 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/editcourseenddatetext"
+                    android:id="@+id/edit_course_end_date_text"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:hint="Enter Course End Date">
@@ -95,8 +95,17 @@
 
                 </TextView>
 
+                <Spinner
+                    android:id="@+id/Course_Status_Spinner"
+                    android:layout_width="409dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    tools:layout_editor_absoluteX="1dp"
+                    tools:layout_editor_absoluteY="373dp" />
+
                 <EditText
-                    android:id="@+id/editcoursestatustext"
+                    android:id="@+id/edit_course_status_text"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:hint="Enter Course Status"></EditText>
@@ -104,14 +113,6 @@
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
-
-                    <Spinner
-                        android:id="@+id/CourseStatusSpinner"
-                        android:layout_width="409dp"
-                        android:layout_height="wrap_content"
-                        tools:ignore="SpeakableTextPresentCheck"
-                        tools:layout_editor_absoluteX="1dp"
-                        tools:layout_editor_absoluteY="373dp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </LinearLayout>
@@ -129,7 +130,7 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/editcourseinstructornametext"
+                    android:id="@+id/edit_course_instructor_name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:hint="Enter Course Instructor Name"></EditText>
@@ -149,7 +150,7 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/editcourseinstructorphonetext"
+                    android:id="@+id/edit_course_instructor_phone_text"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:hint="Enter Course Instructor Phone"></EditText>
@@ -168,10 +169,29 @@
                 </TextView>
 
                 <EditText
-                    android:id="@+id/editcourseinstructoremailtext"
+                    android:id="@+id/edit_course_instructor_email_text"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:hint="Enter Course Instructor Email"></EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Course Note">
+
+                </TextView>
+
+                <EditText
+                    android:id="@+id/edit_course_note_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:hint="Enter Course Note"></EditText>
             </LinearLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -217,17 +237,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/assessmentInfoRecyclerView"
-        android:layout_width="409dp"
-        android:layout_height="302dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/CourseInfoAddAssessmentButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AssessmentInfoScrollView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/CourseInfoAddAssessmentButton">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/assessmentInfoRecyclerView"
+                android:layout_width="407dp"
+                android:layout_height="156dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="1dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

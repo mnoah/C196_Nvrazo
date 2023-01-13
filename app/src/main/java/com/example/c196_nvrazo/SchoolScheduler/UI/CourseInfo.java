@@ -13,12 +13,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.c196_nvrazo.R;
 import com.example.c196_nvrazo.SchoolScheduler.Database.Repository;
@@ -45,6 +45,7 @@ public class CourseInfo extends AppCompatActivity {
     EditText EditCourseInstructorNameText;
     EditText EditCourseInstructorEmailText;
     EditText EditCourseInstructorPhoneText;
+    EditText EditCourseNoteText;
 
     Spinner courseStatusSpinner;
 
@@ -61,6 +62,7 @@ public class CourseInfo extends AppCompatActivity {
     String CourseInstructorName;
     String CourseInstructorEmail;
     String CourseInstructorPhone;
+    String CourseNote;
 
     int termId;
     int Id;
@@ -77,34 +79,7 @@ public class CourseInfo extends AppCompatActivity {
 
         // The status (in progress, completed, dropped, plan to take)
 
-        EditCourseNameText = findViewById(R.id.editcoursenametext);
-        EditCourseStartDateText = findViewById(R.id.editcoursestartdatetext);
-        EditCourseEndDateText = findViewById(R.id.editcourseenddatetext);
-        EditCourseStatusText = findViewById(R.id.editcoursestatustext);
-
-        EditCourseInstructorNameText = findViewById(R.id.editcourseinstructornametext);
-        EditCourseInstructorPhoneText = findViewById(R.id.editcourseinstructorphonetext);
-        EditCourseInstructorEmailText = findViewById(R.id.editcourseinstructoremailtext);
-        courseStatusSpinner = findViewById(R.id.CourseStatusSpinner);
-
-        Id = getIntent().getIntExtra("Id", -1);
-        CourseName = getIntent().getStringExtra("Name");
-        CourseStartDate = getIntent().getStringExtra("StartDate");
-        CourseEndDate = getIntent().getStringExtra("EndDate");
-        CourseStatus = getIntent().getStringExtra("Status");
-        CourseInstructorName = getIntent().getStringExtra("InstructorName");
-        CourseInstructorEmail = getIntent().getStringExtra("InstructorEmail");
-        CourseInstructorPhone = getIntent().getStringExtra("InstructorPhone");
-        termId = getIntent().getIntExtra("TermId", -1);
-
-
-        EditCourseNameText.setText(CourseName);
-        EditCourseStartDateText.setText(CourseStartDate);
-        EditCourseEndDateText.setText(CourseEndDate);
-        EditCourseStatusText.setText(CourseStatus);
-        EditCourseInstructorNameText.setText(CourseInstructorName);
-        EditCourseInstructorPhoneText.setText(CourseInstructorPhone);
-        EditCourseInstructorEmailText.setText(CourseInstructorEmail);
+        ReloadPage();
 
         repository = new Repository(getApplication());
         List<String> Status = new ArrayList<>();
@@ -115,25 +90,19 @@ public class CourseInfo extends AppCompatActivity {
         Status.add("Dropped");
         Status.add("Plan to take");
 
-        Spinner spinner = findViewById(R.id.CourseStatusSpinner);
+        String compareValue = CourseStatus;
+        Spinner spinner = findViewById(R.id.Course_Status_Spinner);
+
         ArrayAdapter<String> statusArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Status);
+        statusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(statusArrayAdapter);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(CourseStatus == "Select Status") {
-                    EditCourseStatusText.setText(statusArrayAdapter.getItem(i));
-                }else{
-                    return;
-                }
-            }
+        if (compareValue != null) {
+            int spinnerPosition = statusArrayAdapter.getPosition(compareValue);
+            spinner.setSelection(spinnerPosition);
+        }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                EditCourseStatusText.setText("Nothing selected");
-            }
-        });
+
 
         //getting and displaying assessments for a given term
         RecyclerView recyclerView = findViewById(R.id.assessmentInfoRecyclerView);
@@ -151,8 +120,11 @@ public class CourseInfo extends AppCompatActivity {
         //Save button setup
         Button saveButton = findViewById(R.id.CourseInfoSaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                CourseStatus = spinner.getSelectedItem().toString();
+                EditCourseStatusText.setText(CourseStatus);
                 if (Id == -1) {
                     course = new Course(0, EditCourseNameText.getText().toString(),
                             EditCourseStartDateText.getText().toString(),
@@ -161,7 +133,10 @@ public class CourseInfo extends AppCompatActivity {
                             EditCourseInstructorNameText.getText().toString(),
                             EditCourseInstructorPhoneText.getText().toString(),
                             EditCourseInstructorEmailText.getText().toString(),
+                            EditCourseNoteText.getText().toString(),
                             termId);
+                    Toast.makeText(CourseInfo.this, EditCourseNameText.getText().toString() + " was created", Toast.LENGTH_LONG).show();
+
                     repository.insert(course);
                 } else {
                     course = new Course(Id, EditCourseNameText.getText().toString(),
@@ -171,9 +146,13 @@ public class CourseInfo extends AppCompatActivity {
                             EditCourseInstructorNameText.getText().toString(),
                             EditCourseInstructorPhoneText.getText().toString(),
                             EditCourseInstructorEmailText.getText().toString(),
+                            EditCourseNoteText.getText().toString(),
                             termId);
                     repository.update(course);
+                    Toast.makeText(CourseInfo.this, CourseName + " was updated", Toast.LENGTH_LONG).show();
+
                 }
+                finish();
             }
 
         });
@@ -189,9 +168,14 @@ public class CourseInfo extends AppCompatActivity {
                         EditCourseInstructorNameText.getText().toString(),
                         EditCourseInstructorPhoneText.getText().toString(),
                         EditCourseInstructorEmailText.getText().toString(),
+                        EditCourseNoteText.getText().toString(),
                         termId);
                 repository.delete(course);
+
+                Toast.makeText(CourseInfo.this, CourseName + " was deleted", Toast.LENGTH_LONG).show();
+                finish();
             }
+
         });
 
 
@@ -271,6 +255,7 @@ public class CourseInfo extends AppCompatActivity {
 
     }
 
+
     private void updateLabelStart() {
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -297,13 +282,13 @@ public class CourseInfo extends AppCompatActivity {
             case R.id.share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, EditCourseNameText.getText().toString());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, EditCourseNoteText.getText().toString());
                 sendIntent.putExtra(Intent.EXTRA_TITLE, "Message Title");
                 sendIntent.setType("text/plain");
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
                 return true;
-            case R.id.notifystart:
+            case R.id.notify_start:
                 String dateFromScreen = EditCourseStartDateText.getText().toString();
                 String myFormat = "MM/dd/yy"; //In which you need put here
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
@@ -317,17 +302,36 @@ public class CourseInfo extends AppCompatActivity {
 
                 Long trigger = myDate.getTime();
                 Intent intent = new Intent(CourseInfo.this, MyReceiver.class);
-                intent.putExtra("key", dateFromScreen + " should trigger");
+                intent.putExtra("key", "Start Date: " +dateFromScreen + " should trigger");
                 PendingIntent sender = PendingIntent.getBroadcast(CourseInfo.this, ++MainActivity.NumberAlrt, intent, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
                 return true;
-            case R.id.notifyend:
+            case R.id.notify_end:
+                 dateFromScreen = EditCourseEndDateText.getText().toString();
+                 myFormat = "MM/dd/yy"; //In which you need put here
+                 simpleDateFormat = new SimpleDateFormat(myFormat, Locale.US);
+                 myDate = null;
+
+                try {
+                    myDate = simpleDateFormat.parse(dateFromScreen);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                 trigger = myDate.getTime();
+                 intent = new Intent(CourseInfo.this, MyReceiver.class);
+                 intent.putExtra("key", "Start Date: " + dateFromScreen + " should trigger");
+                 sender = PendingIntent.getBroadcast(CourseInfo.this, ++MainActivity.NumberAlrt, intent, PendingIntent.FLAG_IMMUTABLE);
+                 alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         RecyclerView recyclerView = findViewById(R.id.assessmentInfoRecyclerView);
@@ -340,6 +344,42 @@ public class CourseInfo extends AppCompatActivity {
                 filteredAssessments.add(a);
         }
         assessmentAdapter.setAssessment(filteredAssessments);
+        ReloadPage();
 
+
+    }
+
+    public void ReloadPage(){
+        EditCourseNameText = findViewById(R.id.edit_course_name_text);
+        EditCourseStartDateText = findViewById(R.id.edit_course_start_date_text);
+        EditCourseEndDateText = findViewById(R.id.edit_course_end_date_text);
+        EditCourseStatusText = findViewById(R.id.edit_course_status_text);
+        courseStatusSpinner = findViewById(R.id.Course_Status_Spinner);
+        EditCourseInstructorNameText = findViewById(R.id.edit_course_instructor_name_text);
+        EditCourseInstructorPhoneText = findViewById(R.id.edit_course_instructor_phone_text);
+        EditCourseInstructorEmailText = findViewById(R.id.edit_course_instructor_email_text);
+        EditCourseNoteText = findViewById(R.id.edit_course_note_text);
+
+
+        Id = getIntent().getIntExtra("Id", -1);
+        CourseName = getIntent().getStringExtra("Name");
+        CourseStartDate = getIntent().getStringExtra("StartDate");
+        CourseEndDate = getIntent().getStringExtra("EndDate");
+        CourseStatus = getIntent().getStringExtra("Status");
+        CourseInstructorName = getIntent().getStringExtra("InstructorName");
+        CourseInstructorEmail = getIntent().getStringExtra("InstructorEmail");
+        CourseInstructorPhone = getIntent().getStringExtra("InstructorPhone");
+        CourseNote = getIntent().getStringExtra("Note");
+        termId = getIntent().getIntExtra("TermId", -1);
+
+
+        EditCourseNameText.setText(CourseName);
+        EditCourseStartDateText.setText(CourseStartDate);
+        EditCourseEndDateText.setText(CourseEndDate);
+        EditCourseStatusText.setText(CourseStatus);
+        EditCourseInstructorNameText.setText(CourseInstructorName);
+        EditCourseInstructorPhoneText.setText(CourseInstructorPhone);
+        EditCourseInstructorEmailText.setText(CourseInstructorEmail);
+        EditCourseNoteText.setText(CourseNote);
     }
 }

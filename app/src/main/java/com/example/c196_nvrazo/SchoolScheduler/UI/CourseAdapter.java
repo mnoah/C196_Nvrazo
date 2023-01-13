@@ -22,12 +22,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         private final TextView courseNameView;
         private final TextView courseStartView;
         private final TextView courseEndView;
+        private final TextView courseNoteView;
 
         private CourseViewHolder(View itemview) {
             super(itemview);
             courseNameView = itemview.findViewById(R.id.CourseNameListView);
             courseStartView = itemview.findViewById(R.id.CourseStartDateListView);
             courseEndView = itemview.findViewById(R.id.CourseEndDateListView);
+            courseNoteView = itemview.findViewById(R.id.CourseNoteListView);
+
 
 
             itemview.setOnClickListener(new View.OnClickListener() {
@@ -44,8 +47,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     intent.putExtra("InstructorName", current.getCourseInstructorName());
                     intent.putExtra("InstructorEmail", current.getCourseInstructorEmail());
                     intent.putExtra("InstructorPhone", current.getCourseInstructorPhone());
+                    intent.putExtra("Note", current.getCourseNote());
                     intent.putExtra("TermId", current.getTermId());
-
                     context.startActivity(intent);
 
                 }
@@ -66,22 +69,24 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @NonNull
     @Override
-    public com.example.c196_nvrazo.SchoolScheduler.UI.CourseAdapter.CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.course_list_item, parent, false);
 
-        return new com.example.c196_nvrazo.SchoolScheduler.UI.CourseAdapter.CourseViewHolder(itemView);
+        return new CourseViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.c196_nvrazo.SchoolScheduler.UI.CourseAdapter.CourseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CourseAdapter.CourseViewHolder holder, int position) {
         if (mCourses != null) {
             Course current = mCourses.get(position);
             String name = current.getCourseName();
             String start = current.getCourseStartDate();
             String end = current.getCourseEndDate();
+            String note = current.getCourseNote();
             holder.courseNameView.setText(name);
             holder.courseStartView.setText(start);
             holder.courseEndView.setText(end);
+            holder.courseNoteView.setText(note);
 
 
         } else {

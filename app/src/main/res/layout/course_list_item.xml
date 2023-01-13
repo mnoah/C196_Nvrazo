@@ -20,7 +20,6 @@
         android:text="TextView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/CourseNameListView"/>
-
     <TextView
         android:id="@+id/CourseEndDateListView"
         android:layout_width="100dp"
@@ -28,5 +27,12 @@
         android:text="TextView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/CourseStartDateListView"/>
+    <TextView
+        android:id="@+id/CourseNoteListView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/CourseEndDateListView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
